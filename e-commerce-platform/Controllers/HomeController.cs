@@ -1,31 +1,31 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using e_commerce_platform.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace e_commerce_platform.Controllers;
 
+
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly DataContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(DataContext context)
     {
-        _logger = logger;
+        _context=context;
     }
 
     public IActionResult Index()
     {
-        return View();
+       ViewData ["Categories"] = _context.Categories.ToList();
+       ViewData ["Sliders"] = _context.Sliders.ToList();
+       var products = _context.Products
+                           .Include(p => p.Images)
+                           .ToList();
+
+        return View(products);
     }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+  
 }
+

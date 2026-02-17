@@ -1,0 +1,23 @@
+
+@model List<Category>
+
+<div class="container">
+        <h2 class="text-center mb-4 fw-bold">Popular Categories</h2>
+        <div class="row text-center">
+
+            @foreach(var item in Model)
+             {
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <img src="" class="card-img-top">
+                        <div class="card-body">
+                            <h5>@item.Name</h5>
+                        </div>
+                    </div>
+                </div>
+             }
+           
+
+            
+        </div>
+    </div>

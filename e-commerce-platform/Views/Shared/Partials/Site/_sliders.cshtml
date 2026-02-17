@@ -1,0 +1,66 @@
+@model List<Slider>
+
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+ @{
+    var x = 0;
+
+    foreach(var item in Model) {
+
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@x" class="@(x==0?"active":"")"></button>
+           
+        </div>
+
+        x= x+1;
+    }
+  
+      
+
+
+ }
+      
+
+        <div class="carousel-inner">
+
+           @{
+            
+            var y = 0;
+
+            foreach(var item in Model)
+            {
+
+             <div class="carousel-item  @(y == 0 ?"active":"") ">
+                <div class="d-flex align-items-center text-light"
+                     style="height:500px; background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('@item.Image') center/cover;">
+                    
+                    <div class="container text-center">
+                        <h1 class="display-4 fw-bold">@item.Title</h1>
+                        <p class="lead">@item.Description</p>
+                        <a href="#" class="btn btn-warning btn-lg mt-3">İncele</a>
+                    </div>
+
+                </div>
+            </div>
+
+            y= y+1;
+            }
+
+           
+
+           }
+            
+
+           
+
+        </div>
+
+     
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+    </div>
