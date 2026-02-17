@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Furkan\\Desktop\\e-commerce-platform\\e-commerce-platform\\e-commerce-platform.csproj",
+      "projectUniqueName": "C:\\Users\\Furkan\\Desktop\\e-commerce\\e-commerce-platform\\e-commerce-platform\\e-commerce-platform.csproj",
       "projectName": "e-commerce-platform",
-      "projectPath": "C:\\Users\\Furkan\\Desktop\\e-commerce-platform\\e-commerce-platform\\e-commerce-platform.csproj",
+      "projectPath": "C:\\Users\\Furkan\\Desktop\\e-commerce\\e-commerce-platform\\e-commerce-platform\\e-commerce-platform.csproj",
       "packagesPath": "C:\\Users\\Furkan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Furkan\\Desktop\\e-commerce-platform\\e-commerce-platform\\obj\\",
+      "outputPath": "C:\\Users\\Furkan\\Desktop\\e-commerce\\e-commerce-platform\\e-commerce-platform\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
