@@ -10,8 +10,8 @@ using e_commerce_platform.Models;
 namespace e_commerce_platform.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20260217211558_dbadd")]
-    partial class dbadd
+    [Migration("20260218162807_category")]
+    partial class category
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,10 @@ namespace e_commerce_platform.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("IsPopular")
                         .HasColumnType("INTEGER");
@@ -44,6 +48,7 @@ namespace e_commerce_platform.Migrations
                         new
                         {
                             Id = 1,
+                            Image = "https://media.istockphoto.com/id/1152767411/photo/cup-of-coffee-latte-isolated-on-white-background-with-clipping-path.jpg?s=612x612&w=0&k=20&c=24HBAvkahjo8LKV-6DRUklQzPJUqxjmVlBFtV5BG4tU=",
                             IsPopular = true,
                             Name = "deneme kategori",
                             Url = "deneme"

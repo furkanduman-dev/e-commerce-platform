@@ -5,7 +5,7 @@
 namespace e_commerce_platform.Migrations
 {
     /// <inheritdoc />
-    public partial class dbadd : Migration
+    public partial class category : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,6 +18,7 @@ namespace e_commerce_platform.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Url = table.Column<string>(type: "TEXT", nullable: false),
+                    Image = table.Column<string>(type: "TEXT", nullable: false),
                     IsPopular = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -91,8 +92,8 @@ namespace e_commerce_platform.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "IsPopular", "Name", "Url" },
-                values: new object[] { 1, true, "deneme kategori", "deneme" });
+                columns: new[] { "Id", "Image", "IsPopular", "Name", "Url" },
+                values: new object[] { 1, "https://media.istockphoto.com/id/1152767411/photo/cup-of-coffee-latte-isolated-on-white-background-with-clipping-path.jpg?s=612x612&w=0&k=20&c=24HBAvkahjo8LKV-6DRUklQzPJUqxjmVlBFtV5BG4tU=", true, "deneme kategori", "deneme" });
 
             migrationBuilder.InsertData(
                 table: "Sliders",

@@ -1,0 +1,62 @@
+@model CategoryCreateModel
+
+@{
+    ViewData["Title"] = "Add Category";
+    Layout = "_AdminLayout";
+}
+
+<div class=" shadow-sm border-0">
+
+    <div class="card-header bg-dark text-white">
+        <h5 class="mb-0">Add New Category</h5>
+    </div>
+
+    <div class="card-body container">
+
+        <form asp-action="Create" method="post" enctype="multipart/form-data" >
+
+           
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" placeholder="Kategori Adı" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+         
+            <div class="mb-3">
+                <label asp-for="Url" class="form-label"></label>
+                <input asp-for="Url" class="form-control" placeholder="Kategori Url" />
+                <span asp-validation-for="Url" class="text-danger"></span>
+            </div>
+
+              <div class="row mb-3">
+                                <label for="Image" class="col-sm-2 col-form-label">Resim</label>
+                                <div class="col-sm-10">
+                                   <input asp-for="Image" type="file" class="form-control" />
+                                </div>
+                </div>
+
+            <div class="form-check mb-3">
+                <input asp-for="IsPopular" class="form-check-input" />
+                <label asp-for="IsPopular" class="form-check-label"></label>
+            </div>
+
+          
+            <div class="d-flex justify-content-end">
+                <a asp-action="Index" class="btn btn-secondary me-2">
+                    Iptal
+                </a>
+                <button type="submit" class="btn btn-success">
+                    Kaydet
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

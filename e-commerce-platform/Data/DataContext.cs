@@ -25,7 +25,7 @@ public class DataContext : DbContext
            modelBuilder.Entity<Category>().HasData(
             new List<Category>
             {
-                new Category(){ Id=1 , Name="deneme kategori" , Url="deneme" , IsPopular=true}
+                new Category(){ Id=1 , Name="deneme kategori" , Url="deneme" , IsPopular=true , Image="https://media.istockphoto.com/id/1152767411/photo/cup-of-coffee-latte-isolated-on-white-background-with-clipping-path.jpg?s=612x612&w=0&k=20&c=24HBAvkahjo8LKV-6DRUklQzPJUqxjmVlBFtV5BG4tU="}
             }
         );
 

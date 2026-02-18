@@ -22,6 +22,10 @@ namespace e_commerce_platform.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("IsPopular")
                         .HasColumnType("INTEGER");
 
@@ -41,6 +45,7 @@ namespace e_commerce_platform.Migrations
                         new
                         {
                             Id = 1,
+                            Image = "https://media.istockphoto.com/id/1152767411/photo/cup-of-coffee-latte-isolated-on-white-background-with-clipping-path.jpg?s=612x612&w=0&k=20&c=24HBAvkahjo8LKV-6DRUklQzPJUqxjmVlBFtV5BG4tU=",
                             IsPopular = true,
                             Name = "deneme kategori",
                             Url = "deneme"
