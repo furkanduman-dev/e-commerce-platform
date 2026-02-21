@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model List<ProductGetModel>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -7,25 +7,25 @@
 <head>
     <style>
         .card:hover {
-    transform: translateY(-5px);
-    transition: 0.3s ease;
-    }
-    .carousel-item {
-    transition: transform 0.8s ease, opacity 0.8s ease;
-}
+            transform: translateY(-5px);
+            transition: 0.3s ease;
+        }
 
-</style>
+        .carousel-item {
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+    </style>
 </head>
 <!-- HERO SECTION -->
 <section id="Sliders">
-    @await Html.PartialAsync("Partials/Site/_sliders",ViewData ["Sliders"])
+    @await Html.PartialAsync("Partials/Site/_sliders", ViewData["Sliders"])
 </section>
 
 
 
 <section class="py-5">
-    @await Html.PartialAsync("Partials/Site/_categories", ViewData ["Categories"])
-    
+    @await Html.PartialAsync("Partials/Site/_categories", ViewData["Categories"])
+
 </section>
 
 
@@ -40,7 +40,8 @@
             {
                 <div class="col-md-3 mb-4">
                     <div class="card h-100 shadow-sm border-0">
-                        <img  src="@product.Images.FirstOrDefault(i => i.IsMain)?.ImageUrl"  class="card-img-top" style="height:200px; object-fit:cover;">
+                        <img src="~/img/@product.MainImage" class="card-img-top" style="height:200px; object-fit:cover;">
+
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">@product.Name</h5>
                             <p class="card-text text-muted">@product.Price ₺</p>
@@ -80,4 +81,3 @@
         </form>
     </div>
 </section>
-

@@ -1,18 +1,18 @@
 namespace e_commerce_platform.Models;
 
-public class Slider
+
+public class SliderCreateModel
 {
-    public int Id { get; set; }
+
+
 
     public string? Title { get; set; }
 
     public string? Description { get; set; }
 
-    public string? Image { get; set; } = null!;
+    public IFormFile Image { get; set; }
 
     public int Index { get; set; } //slider sırası
 
     public bool isActive { get; set; }
-
-
 }

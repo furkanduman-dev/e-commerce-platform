@@ -12,20 +12,37 @@ public class HomeController : Controller
 
     public HomeController(DataContext context)
     {
-        _context=context;
+        _context = context;
     }
 
     public IActionResult Index()
     {
-       ViewData ["Categories"] = _context.Categories.ToList();
-       ViewData ["Sliders"] = _context.Sliders.ToList();
-       var products = _context.Products
-                           .Include(p => p.Images)
-                           .ToList();
+        ViewData["Categories"] = _context.Categories.ToList();
+        ViewData["Sliders"] = _context.Sliders.ToList();
+        var productGet = _context.Products
+            .Select(i => new ProductGetModel
+            {
+                Id = i.Id,
+                Name = i.Name,
+                Price = i.Price,
+                Description = i.Description,
+                IsActive = i.IsActive,
+                IsHomepage = i.IsHomepage,
+                Size = i.Size,
+                CategoryId = i.CategoryId,
+                Category = i.Category,
 
-        return View(products);
+                MainImage = i.Images
+                    .Where(x => x.IsMain)
+                    .Select(x => x.ImageUrl)
+                    .FirstOrDefault()
+            })
+            .ToList();
+
+        return View(productGet);
+
     }
 
-  
+
 }
 

@@ -1,0 +1,72 @@
+@model SliderEditModel
+
+@{
+    ViewData["Title"] = "Add Category";
+    Layout = "_AdminLayout";
+}
+
+<div class=" shadow-sm border-0">
+
+    <div class="card-header bg-dark text-white">
+        <h5 class="mb-0">Add New Category</h5>
+    </div>
+
+    <div class="card-body container">
+
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="Id" value="@Model.Id">
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" placeholder="Slider Adı" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <input asp-for="Description" class="form-control" placeholder="Slider Açıklama" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+
+            <div class=" mb-3">
+                <label asp-for="Index" class="form-label"></label>
+                <input asp-for="Index" class="form-control" />
+
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="isActive" class="form-check-label"></label>
+                <input asp-for="isActive" class="form-check-input" placeholder="Slider Sıra" />
+                <span asp-validation-for="isActive" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <img src="~/img/@Model.ImageName" class="img-thumbnail" alt="">
+                        <input asp-for="ImageFolder" type="file" class="form-control mt-3">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-end">
+                <a asp-action="Index" class="btn btn-secondary me-2">
+                    Iptal
+                </a>
+                <button type="submit" class="btn btn-success">
+                    Kaydet
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

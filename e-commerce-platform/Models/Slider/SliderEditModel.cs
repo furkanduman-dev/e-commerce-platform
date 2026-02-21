@@ -1,6 +1,7 @@
 namespace e_commerce_platform.Models;
 
-public class Slider
+
+public class SliderEditModel
 {
     public int Id { get; set; }
 
@@ -8,11 +9,11 @@ public class Slider
 
     public string? Description { get; set; }
 
-    public string? Image { get; set; } = null!;
+    public string? ImageName { get; set; }
+
+    public IFormFile? ImageFolder { get; set; }
 
     public int Index { get; set; } //slider sırası
 
     public bool isActive { get; set; }
-
-
 }

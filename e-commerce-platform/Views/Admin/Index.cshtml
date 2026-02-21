@@ -1,5 +1,153 @@
 @{
     Layout = "_AdminLayout";
 }
+<style>
+    body {
+        background-color: #f4f6f9;
+    }
 
-<h1>Admin panel</h1>
+    .dashboard-wrapper {
+        padding: 30px;
+    }
+
+    .stat-card {
+        border: none;
+        border-radius: 16px;
+        padding: 25px;
+        transition: 0.3s ease;
+        background: white;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .stat-icon {
+        font-size: 32px;
+        opacity: 0.8;
+    }
+
+    .card-title-small {
+        font-size: 14px;
+        color: #6c757d;
+    }
+
+    .card-value {
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .table-card {
+        border-radius: 16px;
+        border: none;
+    }
+
+    .badge-soft-success {
+        background-color: rgba(25, 135, 84, 0.15);
+        color: #198754;
+        padding: 6px 10px;
+        border-radius: 8px;
+    }
+
+    .badge-soft-warning {
+        background-color: rgba(255, 193, 7, 0.15);
+        color: #ffc107;
+        padding: 6px 10px;
+        border-radius: 8px;
+    }
+</style>
+<main class="dashboard-wrapper">
+
+    <!-- STAT CARDS -->
+    <div class="row g-4">
+
+        <div class="col-md-3">
+            <div class="stat-card shadow-sm">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="card-title-small">Toplam Ürün</div>
+                        <div class="card-value">124</div>
+                    </div>
+                    <div class="stat-icon text-primary">
+                        <i class="bi bi-box"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card shadow-sm">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="card-title-small">Toplam Sipariş</div>
+                        <div class="card-value">58</div>
+                    </div>
+                    <div class="stat-icon text-success">
+                        <i class="bi bi-cart"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card shadow-sm">
+                <div>
+                    <div class="card-title-small">Kullanıcılar</div>
+                    <div class="card-value">340</div>
+                </div>
+                <div class="stat-icon text-warning">
+                    <i class="bi bi-people"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card shadow-sm">
+                <div>
+                    <div class="card-title-small">Toplam Ciro</div>
+                    <div class="card-value">₺ 42.500</div>
+                </div>
+                <div class="stat-icon text-danger">
+                    <i class="bi bi-currency-dollar"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TABLE SECTION -->
+    <div class="card table-card shadow-sm mt-5">
+        <div class="card-header bg-white border-0">
+            <h6 class="mb-0">Son Siparişler</h6>
+        </div>
+
+        <div class="card-body">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Müşteri</th>
+                        <th>Tutar</th>
+                        <th>Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1024</td>
+                        <td>Ahmet Yılmaz</td>
+                        <td>₺ 850</td>
+                        <td><span class="badge-soft-success">Tamamlandı</span></td>
+                    </tr>
+                    <tr>
+                        <td>1025</td>
+                        <td>Mehmet Kaya</td>
+                        <td>₺ 1200</td>
+                        <td><span class="badge-soft-warning">Hazırlanıyor</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</main>
