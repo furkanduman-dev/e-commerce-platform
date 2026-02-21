@@ -1,0 +1,136 @@
+@model List<ProductGetModel>
+
+@{
+    ViewData["Title"] = "Category Management";
+    Layout = "_AdminLayout";
+}
+<style>
+    .image-box {
+        width: 90px;
+        height: 60px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-self: center;
+    }
+
+    .image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        using e_commerce_platform.Controllers;
+        using e_commerce_platform.Controllers;
+    }
+</style>
+
+<div class="card shadow-sm border-0">
+
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Ürünler</h5>
+        <a asp-action="Create" class="btn btn-warning btn-sm">
+            + Yeni Ürün Ekle
+        </a>
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+
+                <thead class="table-light">
+                    <tr class="text-center">
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Açıklama</th>
+                        <th>Fiyat</th>
+                        <th>Size</th>
+                        <th>Category</th>
+                        <th>Resim</th>
+                        <th>Populer</th>
+                        <th>Anasayfa</th>
+                        <th class="text-end">İşlemler</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+
+                        foreach (var item in Model)
+                        {
+                            <tr class="text-center">
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                <td>@item.Description</td>
+                                <td>@item.Price</td>
+                                <td>@item.Size</td>
+                                <td>@item.Category.Name</td>
+                                <td>
+                                    <div class="image-box">
+                                        <img src="~/img/@item.MainImage" alt="">
+                                    </div>
+                                </td>
+
+
+                                @if (item.IsActive)
+                                {
+                                    <td>
+                                        <i class="fa fa-check" aria-hidden="true">✔️</i>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <i class="fa fa-times" aria-hidden="true">❌</i>
+
+                                    </td>
+                                }
+                                @if (item.IsHomepage)
+                                {
+                                    <td>
+                                        <i class="fa fa-check" aria-hidden="true">✔️</i>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <i class="fa fa-times" aria-hidden="true">❌</i>
+
+                                    </td>
+                                }
+
+
+                                <td class="text-end">
+
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">
+                                        Düzenle
+                                    </a>
+
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Bu ürün kalıcı olarak silinsin mi?')">
+                                        Sil
+                                    </a>
+
+                                </td>
+                            </tr>
+
+
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">
+                                No categories found.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+</div>

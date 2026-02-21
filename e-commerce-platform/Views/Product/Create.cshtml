@@ -1,0 +1,180 @@
+@model e_commerce_platform.Models.ProductCreateModel
+
+@{
+    ViewData["Title"] = "Yeni Ürün Ekle";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0">Yeni Ürün Ekle</h4>
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                <!-- Ürün Adı -->
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <!-- Açıklama -->
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <!-- Fiyat -->
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <!-- Beden -->
+                <div class="mb-3">
+                    <label asp-for="Size" class="form-label"></label>
+                    <input asp-for="Size" class="form-control" />
+                </div>
+
+                <!-- Kategori -->
+                <div class="mb-3">
+                    <label asp-for="CategoryId" class="form-label">Kategori</label>
+                    <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select">
+                        <option value="">Kategori Seçiniz</option>
+                    </select>
+                </div>
+
+                <!-- Aktif -->
+                <div class="form-check mb-2">
+                    <input asp-for="IsActive" class="form-check-input" />
+                    <label asp-for="IsActive" class="form-check-label"></label>
+                </div>
+
+                <!-- Anasayfa -->
+                <div class="form-check mb-3">
+                    <input asp-for="IsHomepage" class="form-check-input" />
+                    <label asp-for="IsHomepage" class="form-check-label"></label>
+                </div>
+
+                <!-- Çoklu Resim Upload -->
+                <div class="mb-3">
+                    <label class="form-label">Ürün Görselleri</label>
+                    <input asp-for="ImageFiles" type="file" multiple class="form-control" id="imageInput" />
+                </div>
+
+                <!-- Preview Alanı -->
+                <div class="row mt-3" id="previewContainer"></div>
+
+                <hr />
+
+                <button type="submit" class="btn btn-success">
+                    Kaydet
+                </button>
+
+                <a asp-action="Index" class="btn btn-secondary">
+                    İptal
+                </a>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        const input = document.getElementById("imageInput");
+        const preview = document.getElementById("previewContainer");
+
+        let filesArray = [];
+
+        input.addEventListener("change", function () {
+            filesArray = Array.from(this.files);
+            renderPreview();
+        });
+
+        function updateInputFiles() {
+
+            const dataTransfer = new DataTransfer();
+
+            filesArray.forEach(file => {
+                dataTransfer.items.add(file);
+            });
+
+            input.files = dataTransfer.files;
+        }
+
+        function renderPreview() {
+
+            preview.innerHTML = "";
+
+            filesArray.forEach((file, index) => {
+
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    const col = document.createElement("div");
+                    col.className = "col-md-2 mb-3";
+
+                    col.innerHTML = `
+                                <div class="border rounded p-2 text-center position-relative bg-light">
+
+                                    <button type="button"
+                                            class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1"
+                                            onclick="removeImage(${index})">
+                                        ✖
+                                    </button>
+
+                                    <img src="${e.target.result}" 
+                                         class="img-fluid rounded"
+                                         style="height:120px; object-fit:cover;">
+
+                                    <div class="mt-2">
+                                        ${index === 0
+                            ? '<span class="badge bg-success">ANA GÖRSEL</span>'
+                            : `<button type="button" 
+                                                       class="btn btn-sm btn-outline-primary"
+                                                       onclick="setMain(${index})">
+                                                       Ana Görsel Yap
+                                               </button>`}
+                                    </div>
+
+                                </div>
+                            `;
+
+                    preview.appendChild(col);
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+            updateInputFiles(); // 👈 kritik nokta
+        }
+
+        function setMain(index) {
+
+            const selected = filesArray[index];
+            filesArray.splice(index, 1);
+            filesArray.unshift(selected);
+
+            renderPreview();
+        }
+
+        function removeImage(index) {
+
+            filesArray.splice(index, 1);
+            renderPreview();
+        }
+    </script>
+}

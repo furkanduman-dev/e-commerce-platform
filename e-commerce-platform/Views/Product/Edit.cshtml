@@ -1,0 +1,142 @@
+@model ProductEditModel
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0">
+                <i class="bi bi-pencil-square"></i> Ürünü Düzenle
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row">
+
+                    <!-- SOL TARAF -->
+                    <div class="col-lg-7">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Ürün Adı</label>
+                            <input asp-for="Name" class="form-control form-control-lg" />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Açıklama</label>
+                            <textarea asp-for="Description" rows="5" class="form-control"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Fiyat</label>
+                                <input asp-for="Price" class="form-control" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Beden</label>
+                                <input asp-for="Size" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Kategori</label>
+                            <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select">
+                            </select>
+                        </div>
+
+                        <div class="d-flex gap-4 mb-3">
+                            <div class="form-check form-switch">
+                                <input asp-for="IsActive" class="form-check-input" />
+                                <label class="form-check-label">Aktif</label>
+                            </div>
+
+                            <div class="form-check form-switch">
+                                <input asp-for="IsHomepage" class="form-check-input" />
+                                <label class="form-check-label">Anasayfada Göster</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- SAĞ TARAF -->
+                    <div class="col-lg-5">
+
+                        <label class="form-label fw-semibold">Mevcut Görseller</label>
+
+                        <div class="row g-3">
+
+                            @foreach (var img in Model.ExistingImages)
+                            {
+                                <div class="col-6">
+                                    <div class="card shadow-sm border-0 position-relative">
+
+                                        <img src="~/img/@img.ImageUrl" class="card-img-top"
+                                            style="height:180px; object-fit:cover;" />
+
+                                        <!-- Sil Butonu -->
+                                        <a asp-action="DeleteImage" asp-route-id="@img.Id" asp-route-productId="@Model.Id"
+                                            class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2"
+                                            onclick="return confirm('Bu görsel silinsin mi?')">
+                                            ✖
+                                        </a>
+
+                                        @if (img.IsMain)
+                                        {
+                                            <span class="badge bg-success position-absolute bottom-0 start-0 m-2">
+                                                Ana Görsel
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="SetMainImage" asp-route-id="@img.Id" asp-route-productId="@Model.Id"
+                                                class="btn btn-sm btn-outline-primary position-absolute bottom-0 start-0 m-2">
+                                                Ana Görsel Yap
+                                            </a>
+                                        }
+
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                        <hr class="my-4" />
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">
+                                Yeni Görsel Ekle
+                            </label>
+                            <input type="file" asp-for="NewImages" multiple class="form-control" />
+                            <small class="text-muted">
+                                JPG veya PNG formatında çoklu seçim yapabilirsiniz.
+                            </small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="text-end mt-4">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        Geri Dön
+                    </a>
+                    <button type="submit" class="btn btn-dark px-4">
+                        Güncelle
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
