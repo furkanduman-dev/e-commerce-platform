@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Furkan\\Desktop\\e-commerce\\e-commerce-platform\\e-commerce-platform\\e-commerce-platform.csproj": {}
+    "/Users/furkanduman/Desktop/training/Traning Room/E-commerce/e-commerce-platform/e-commerce-platform/e-commerce-platform.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Furkan\\Desktop\\e-commerce\\e-commerce-platform\\e-commerce-platform\\e-commerce-platform.csproj": {
+    "/Users/furkanduman/Desktop/training/Traning Room/E-commerce/e-commerce-platform/e-commerce-platform/e-commerce-platform.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Furkan\\Desktop\\e-commerce\\e-commerce-platform\\e-commerce-platform\\e-commerce-platform.csproj",
+        "projectUniqueName": "/Users/furkanduman/Desktop/training/Traning Room/E-commerce/e-commerce-platform/e-commerce-platform/e-commerce-platform.csproj",
         "projectName": "e-commerce-platform",
-        "projectPath": "C:\\Users\\Furkan\\Desktop\\e-commerce\\e-commerce-platform\\e-commerce-platform\\e-commerce-platform.csproj",
-        "packagesPath": "C:\\Users\\Furkan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Furkan\\Desktop\\e-commerce\\e-commerce-platform\\e-commerce-platform\\obj\\",
+        "projectPath": "/Users/furkanduman/Desktop/training/Traning Room/E-commerce/e-commerce-platform/e-commerce-platform/e-commerce-platform.csproj",
+        "packagesPath": "/Users/furkanduman/.nuget/packages/",
+        "outputPath": "/Users/furkanduman/Desktop/training/Traning Room/E-commerce/e-commerce-platform/e-commerce-platform/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Furkan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/furkanduman/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -51,6 +44,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.3, )"
@@ -83,6 +80,20 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.12, 9.0.12]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.osx-arm64",
+              "version": "[9.0.12, 9.0.12]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.12, 9.0.12]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -91,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

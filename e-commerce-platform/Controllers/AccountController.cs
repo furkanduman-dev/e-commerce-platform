@@ -48,11 +48,13 @@ public class AccountController : Controller
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Home");
+
             }
 
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error.Description);
+
             }
         }
         return View(createModel);
