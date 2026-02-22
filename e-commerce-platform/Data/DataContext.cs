@@ -1,19 +1,22 @@
 namespace e_commerce_platform.Models;
+
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
-public class DataContext : DbContext
+public class DataContext : IdentityDbContext<AppUser, AppRole, int>
 {
     public DataContext(DbContextOptions<DataContext> options) : base(options)
     {
-        
+
     }
 
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<ProductImage> ProductImages { get; set; }
 
-    public DbSet<Slider> Sliders {get; set;}
+    public DbSet<Slider> Sliders { get; set; }
 
 
 
@@ -22,12 +25,12 @@ public class DataContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-           modelBuilder.Entity<Category>().HasData(
-            new List<Category>
-            {
+        modelBuilder.Entity<Category>().HasData(
+         new List<Category>
+         {
                 new Category(){ Id=1 , Name="deneme kategori" , Url="deneme" , IsPopular=true , Image="https://media.istockphoto.com/id/1152767411/photo/cup-of-coffee-latte-isolated-on-white-background-with-clipping-path.jpg?s=612x612&w=0&k=20&c=24HBAvkahjo8LKV-6DRUklQzPJUqxjmVlBFtV5BG4tU="}
-            }
-        );
+         }
+     );
 
         modelBuilder.Entity<Product>().HasData(
             new List<Product>
@@ -35,8 +38,8 @@ public class DataContext : DbContext
                 new Product(){ Id=1 , CategoryId=1, Description="deneme açıklama", IsActive=true , IsHomepage=true , Name="deneme ürün" , Price=1, Size="orta" }
             }
         );
-      
-         // PRODUCT IMAGES
+
+        // PRODUCT IMAGES
         modelBuilder.Entity<ProductImage>().HasData(
             new ProductImage
             {
@@ -47,13 +50,13 @@ public class DataContext : DbContext
                 DisplayOrder = 1
             }
         );
-          modelBuilder.Entity<Slider>().HasData(
-            new List<Slider>
-            {
+        modelBuilder.Entity<Slider>().HasData(
+          new List<Slider>
+          {
                 new Slider(){ Id=1 ,  Description="deneme slider" , Index=0 , isActive=true , Title="Deneme slider title" , Image=""}
-            }
-        );
-        
+          }
+      );
+
 
 
     }
