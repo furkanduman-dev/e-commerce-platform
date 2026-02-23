@@ -11,7 +11,7 @@ using e_commerce_platform.Models;
 namespace e_commerce_platform.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20260222203904_IdentityMode")]
+    [Migration("20260223165727_IdentityMode")]
     partial class IdentityMode
     {
         /// <inheritdoc />
