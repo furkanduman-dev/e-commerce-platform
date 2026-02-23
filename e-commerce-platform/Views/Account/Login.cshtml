@@ -1,0 +1,119 @@
+@model AccountLoginModel
+
+@{
+    ViewData["Title"] = "Giriş Yap";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #111 0%, #2c3e50 100%);
+    }
+
+    .login-card {
+        backdrop-filter: blur(15px);
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+
+    .form-control {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+    }
+
+    .form-control:focus {
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, .4);
+        color: white;
+    }
+
+    .form-check-input {
+        background-color: rgba(255, 255, 255, 0.2);
+        border: none;
+    }
+
+    .form-check-label {
+        color: #ddd;
+    }
+
+    .form-label {
+        color: #ddd;
+    }
+
+    .btn-login {
+        background: #ffc107;
+        border: none;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .btn-login:hover {
+        background: #ffca2c;
+        transform: translateY(-2px);
+    }
+
+    .brand-title {
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+</style>
+
+<div class="container vh-100 d-flex align-items-center justify-content-center">
+    <div class="row w-100 justify-content-center">
+        <div class="col-md-5">
+
+            <div class="login-card shadow-lg p-5">
+
+                <h2 class="text-center mb-4 brand-title">Giriş Yap</h2>
+
+                <form asp-action="Login" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <!-- EMAIL -->
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control rounded-pill px-4 py-2"
+                            placeholder="Email adresiniz">
+                        <span asp-validation-for="Email" class="text-warning small"></span>
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label"></label>
+                        <input asp-for="Password" class="form-control rounded-pill px-4 py-2" placeholder="Şifre">
+                        <span asp-validation-for="Password" class="text-warning small"></span>
+                    </div>
+
+                    <!-- REMEMBER ME -->
+                    <div class="mb-4 form-check">
+                        <input asp-for="RememberMe" class="form-check-input" />
+                        <label asp-for="RememberMe" class="form-check-label"></label>
+                    </div>
+
+                    <!-- BUTTON -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-login rounded-pill py-2">
+                            Giriş Yap
+                        </button>
+                    </div>
+
+                </form>
+
+                <div class="text-center mt-4">
+                    <small>Hesabın yok mu?</small>
+                    <a asp-action="Register" class="text-warning fw-bold ms-1">
+                        Üye Ol
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

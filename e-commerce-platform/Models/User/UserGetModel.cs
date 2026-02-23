@@ -1,7 +1,10 @@
 namespace e_commerce_platform.Models;
 
-public class AccountEditUserModel
+
+public class UserGetModel
 {
+
+    public int Id { get; set; }
 
     public string FullName { get; set; } = null!;
 
