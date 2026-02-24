@@ -174,6 +174,11 @@ public class AccountController : Controller
 
     }
 
+    public ActionResult ChangePassword()
+    {
+        return View();
+    }
+
 
 
 
