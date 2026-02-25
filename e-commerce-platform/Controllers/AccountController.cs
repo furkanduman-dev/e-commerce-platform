@@ -207,6 +207,22 @@ public class AccountController : Controller
         return View(cpmodel);
     }
 
+    public ActionResult ForgotPassword()
+    {
+
+        return View();
+    }
+
+
+    [HttpPost]
+    public ActionResult ForgotPassword(string email)
+    {
+
+
+
+        return View();
+    }
+
 
 
 
