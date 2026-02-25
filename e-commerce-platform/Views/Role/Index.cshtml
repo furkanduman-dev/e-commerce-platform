@@ -1,0 +1,91 @@
+@model IEnumerable<AppRole>
+
+@{
+    ViewData["Title"] = "Roller";
+}
+
+<div class="container py-5">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Rol Listesi</h2>
+        <a asp-action="Create" class="btn btn-dark">
+            Yeni Rol
+        </a>
+    </div>
+
+    <!-- SEARCH CARD -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <input type="text" id="searchInput" class="form-control" placeholder="Rol ara...">
+        </div>
+    </div>
+
+    <!-- TABLE CARD -->
+    <div class="card shadow-lg border-0">
+        <div class="card-body p-0">
+
+            <table class="table table-hover align-middle mb-0" id="roleTable">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Rol Adı</th>
+                        <th class="text-end">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var role in Model)
+                        {
+                            <tr>
+                                <td>@role.Id</td>
+                                <td>
+                                    <span class="badge bg-primary px-3 py-2">
+                                        @role.Name
+                                    </span>
+                                </td>
+                                <td class="text-end">
+                                    <a asp-action="Edit" asp-route-id="@role.Id" class="btn btn-sm btn-warning me-2">
+                                        Düzenle
+                                    </a>
+
+                                    <a asp-action="Delete" asp-route-id="@role.Id" class="btn btn-sm btn-danger">
+                                        Sil
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" class="text-center py-4">
+                                Rol bulunamadı.
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        // Canlı rol arama
+        document.getElementById("searchInput").addEventListener("keyup", function () {
+            let value = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#roleTable tbody tr");
+
+            rows.forEach(row => {
+                row.style.display =
+                    row.innerText.toLowerCase().includes(value) ? "" : "none";
+            });
+        });
+    </script>
+}
