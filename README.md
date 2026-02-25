@@ -6,7 +6,7 @@ Designed following clean architecture principles with a focus on maintainability
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![C#](https://img.shields.io/badge/Language-C%23-blue)
 ![ASP.NET](https://img.shields.io/badge/Framework-ASP.NET%20MVC-blue)
-![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue)
+![SQLite](https://img.shields.io/badge/Database-SQLite-blue)
 ![Bootstrap](https://img.shields.io/badge/UI-Bootstrap-purple)
 
 ---
