@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddTransient<IEmailService, SmtpEmailService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

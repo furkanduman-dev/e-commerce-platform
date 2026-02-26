@@ -16,14 +16,15 @@ public class AccountController : Controller
     private UserManager<AppUser> _userManager;
     private SignInManager<AppUser> _singInManager;
 
+    private IEmailService _emailservice;
 
 
 
-
-    public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+    public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IEmailService emailService)
     {
         _userManager = userManager;
         _singInManager = signInManager;
+        _emailservice = emailService;
 
     }
 
@@ -207,22 +208,99 @@ public class AccountController : Controller
         return View(cpmodel);
     }
 
+
     public ActionResult ForgotPassword()
     {
 
         return View();
     }
 
-
     [HttpPost]
-    public ActionResult ForgotPassword(string email)
+    public async Task<ActionResult> ForgotPassword(string email)
     {
 
+        if (string.IsNullOrEmpty(email))
+        {
+            TempData["Mesaj"] = "E-posta Adresinizi Giriniz";
+            return View();
+        }
 
+        var user = await _userManager.FindByEmailAsync(email); //sistemde bu email bar mı diye kontrol ediliyor
 
-        return View();
+        if (user == null)
+        {
+            TempData["Mesaj"] = "Sistemde E-posta kayıtlı değildir";
+            return View();
+        }
+
+        var token = await _userManager.GeneratePasswordResetTokenAsync(user); // token bilgisi oluşturur çünkğ e-posta ile db deki token bilgisi karşılaştırılır
+
+        var url = Url.Action("ResetPassword", "Account", new { userId = user.Id, token });
+
+        var link = $"<a href='http://localhost:5041{url}'>Şifre Yenile</a>"; //link oluştur
+
+        await _emailservice.SendEmailAsync(user.Email!, "Parola Sıfırlama", link); //interface göre sırala ve üstte gelen linki sona ekle
+
+        TempData["Mesaj"] = "E-posta Adresiize Gönderilen Mail ile şirenizi yenileyebilirsiniz";
+
+        return RedirectToAction("Login");
     }
 
+
+
+    public async Task<ActionResult> ResetPassword(string userId, string token)
+    {
+        if (userId == null || token == null)
+        {
+            return RedirectToAction("Login1");
+        }
+        var user = await _userManager.FindByIdAsync(userId);
+
+        if (user == null)
+        {
+            return RedirectToAction("Login2");
+        }
+
+        var model = new AccountResetPasswordModel
+        {
+            Token = token,
+            Email = user.Email!
+        };
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> ResetPassword(AccountResetPasswordModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login");
+            }
+            var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+
+            if (result.Succeeded)
+            {
+                TempData["Mesaj"] = "Şifreniz Başarı İle Güncellendi";
+                return RedirectToAction("Login");
+            }
+
+            foreach (var err in result.Errors)
+            {
+                ModelState.AddModelError("", err.Description);
+            }
+        }
+
+        return View(model);
+    }
+
+    public ActionResult AccessDenied()
+    {
+        return View();
+    }
 
 
 
