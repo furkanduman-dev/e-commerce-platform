@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using e_commerce_platform.Models;
 
@@ -10,9 +11,11 @@ using e_commerce_platform.Models;
 namespace e_commerce_platform.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20260228155628_CartModel")]
+    partial class CartModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
@@ -210,45 +213,6 @@ namespace e_commerce_platform.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("e_commerce_platform.Models.Cart", b =>
-                {
-                    b.Property<int>("CartId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("CartId");
-
-                    b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("e_commerce_platform.Models.CartItem", b =>
-                {
-                    b.Property<int>("CartItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CartId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Miktar")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("CartItemId");
-
-                    b.HasIndex("CartId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("CartItem");
                 });
 
             modelBuilder.Entity("e_commerce_platform.Models.Category", b =>
@@ -461,25 +425,6 @@ namespace e_commerce_platform.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("e_commerce_platform.Models.CartItem", b =>
-                {
-                    b.HasOne("e_commerce_platform.Models.Cart", "Cart")
-                        .WithMany("CartItems")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("e_commerce_platform.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("e_commerce_platform.Models.Product", b =>
                 {
                     b.HasOne("e_commerce_platform.Models.Category", "Category")
@@ -500,11 +445,6 @@ namespace e_commerce_platform.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("e_commerce_platform.Models.Cart", b =>
-                {
-                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("e_commerce_platform.Models.Category", b =>

@@ -13,8 +13,8 @@ public class ProductCreateModel
     [MaxLength(1000)]
     public string? Description { get; set; }
 
-    [Range(0, double.MaxValue)]
-    public decimal Price { get; set; }
+
+    public double Price { get; set; }
 
     public bool IsActive { get; set; } = true;
 

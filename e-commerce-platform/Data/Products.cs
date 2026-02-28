@@ -5,28 +5,27 @@ namespace e_commerce_platform.Models;
 
 public class Product
 {
-    
+
   public int Id { get; set; }
 
-    [Required]
-    [MaxLength(150)]
-    public string Name { get; set; } = string.Empty;
+  [Required]
+  [MaxLength(150)]
+  public string Name { get; set; } = string.Empty;
 
-    [MaxLength(1000)]
-    public string? Description { get; set; }
+  [MaxLength(1000)]
+  public string? Description { get; set; }
 
-    [Range(0, double.MaxValue)]
-    public decimal Price { get; set; }
+  public double Price { get; set; }
 
-    public bool IsActive { get; set; } = true;
+  public bool IsActive { get; set; } = true;
 
-    public bool IsHomepage { get; set; } = false;
+  public bool IsHomepage { get; set; } = false;
 
-    public string? Size { get; set; }
+  public string? Size { get; set; }
 
-    public int CategoryId { get; set; }
-    public Category Category { get; set; } = null!;
+  public int CategoryId { get; set; }
+  public Category Category { get; set; } = null!;
 
-   
-    public ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
+
+  public ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
 }

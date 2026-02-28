@@ -11,8 +11,8 @@ using e_commerce_platform.Models;
 namespace e_commerce_platform.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20260223165727_IdentityMode")]
-    partial class IdentityMode
+    [Migration("20260228155748_CartModel1")]
+    partial class CartModel1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -215,6 +215,45 @@ namespace e_commerce_platform.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("e_commerce_platform.Models.Cart", b =>
+                {
+                    b.Property<int>("CartId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CartId");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("e_commerce_platform.Models.CartItem", b =>
+                {
+                    b.Property<int>("CartItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Miktar")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("CartItemId");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartItem");
+                });
+
             modelBuilder.Entity("e_commerce_platform.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -275,8 +314,8 @@ namespace e_commerce_platform.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Size")
                         .HasColumnType("TEXT");
@@ -296,7 +335,7 @@ namespace e_commerce_platform.Migrations
                             IsActive = true,
                             IsHomepage = true,
                             Name = "deneme ürün",
-                            Price = 1m,
+                            Price = 1.0,
                             Size = "orta"
                         });
                 });
@@ -425,6 +464,25 @@ namespace e_commerce_platform.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("e_commerce_platform.Models.CartItem", b =>
+                {
+                    b.HasOne("e_commerce_platform.Models.Cart", "Cart")
+                        .WithMany("CartItems")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("e_commerce_platform.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("e_commerce_platform.Models.Product", b =>
                 {
                     b.HasOne("e_commerce_platform.Models.Category", "Category")
@@ -445,6 +503,11 @@ namespace e_commerce_platform.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("e_commerce_platform.Models.Cart", b =>
+                {
+                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("e_commerce_platform.Models.Category", b =>

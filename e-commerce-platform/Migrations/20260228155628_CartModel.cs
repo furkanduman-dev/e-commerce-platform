@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace e_commerce_platform.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentityMode : Migration
+    public partial class CartModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -200,7 +200,7 @@ namespace e_commerce_platform.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
                     Description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
-                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Price = table.Column<double>(type: "REAL", nullable: false),
                     IsActive = table.Column<bool>(type: "INTEGER", nullable: false),
                     IsHomepage = table.Column<bool>(type: "INTEGER", nullable: false),
                     Size = table.Column<string>(type: "TEXT", nullable: true),
@@ -252,7 +252,7 @@ namespace e_commerce_platform.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "CategoryId", "Description", "IsActive", "IsHomepage", "Name", "Price", "Size" },
-                values: new object[] { 1, 1, "deneme açıklama", true, true, "deneme ürün", 1m, "orta" });
+                values: new object[] { 1, 1, "deneme açıklama", true, true, "deneme ürün", 1.0, "orta" });
 
             migrationBuilder.InsertData(
                 table: "ProductImages",

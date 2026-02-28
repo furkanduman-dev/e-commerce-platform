@@ -18,6 +18,8 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int>
 
     public DbSet<Slider> Sliders { get; set; }
 
+    public DbSet<Cart> Carts { get; set; }
+
 
 
 
