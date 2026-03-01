@@ -51,7 +51,7 @@ This structure ensures separation of concerns and scalability.
 - **C#**
 - ASP.NET MVC
 - Entity Framework Core
-- PostgreSQL
+- SQLite
 - Bootstrap
 - HTML / CSS / JavaScript
 
