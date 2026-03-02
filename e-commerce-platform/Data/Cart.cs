@@ -42,6 +42,7 @@ public class Cart
             }
         }
     }
+
     public double AraToplam()
     {
         return CartItems.Sum(i => i.Product.Price * i.Miktar);
