@@ -1,4 +1,5 @@
 using e_commerce_platform.Models;
+using e_commerce_platform.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,8 @@ builder.Services.AddTransient<IEmailService, SmtpEmailService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<ICartService, CartService>();
+
 
 builder.Services.AddDbContext<DataContext>(options =>
 {

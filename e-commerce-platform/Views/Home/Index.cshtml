@@ -45,6 +45,12 @@
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">@product.Name</h5>
                             <p class="card-text text-muted">@product.Price ₺</p>
+                            <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                                <input type="hidden" name="coffeeId" value="@product.Id">
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fa fa-shopping-basket me-1"></i> Sepete Ekle
+                                </button>
+                            </form>
                             <a href="#" class="btn btn-dark mt-auto">Add to Cart</a>
                         </div>
                     </div>

@@ -1,0 +1,86 @@
+@model ProductGetModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container py-5">
+
+    <div class="row">
+
+        <!-- IMAGE SECTION -->
+        <div class="col-md-6">
+
+            <div class="card border-0 shadow-sm rounded-4 p-3">
+
+                <!-- MAIN IMAGE -->
+                <img id="mainImage"
+                     src="~/img/@Model.MainImage"
+                     class="img-fluid rounded-4 mb-3"
+                     style="object-fit:cover; height:450px; width:100%;" />
+
+                <!-- THUMBNAILS -->
+                <div class="d-flex gap-2 flex-wrap">
+                    @foreach (var img in Model.Images)
+                    {
+                            <img src="~/img/@img.ImageUrl"
+                                 class="img-thumbnail thumb-img"
+                                 style="width:80px; height:80px; object-fit:cover; cursor:pointer;"
+                                 onclick="changeImage(this)" />
+                    }
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PRODUCT INFO -->
+        <div class="col-md-6">
+
+            <div class="ps-md-4">
+
+                <h2 class="fw-bold mb-3">@Model.Name</h2>
+
+                <h4 class="text-warning fw-bold mb-3">
+                    @Model.Price ₺
+                </h4>
+
+                @if (!Model.IsActive)
+                {
+                        <div class="alert alert-danger">
+                            Bu ürün şu anda satışta değil.
+                        </div>
+                }
+
+                <p class="text-muted mb-4">
+                    @Model.Description
+                </p>
+
+                @if (!string.IsNullOrEmpty(Model.Size))
+                {
+                        <div class="mb-3">
+                            <strong>Beden:</strong> @Model.Size
+                        </div>
+                }
+
+                <div class="d-grid gap-2 col-8">
+                    <button class="btn btn-dark btn-lg rounded-pill">
+                        Sepete Ekle
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+        <script>
+            function changeImage(element) {
+                document.getElementById("mainImage").src = element.src;
+            }
+        </script>
+}
