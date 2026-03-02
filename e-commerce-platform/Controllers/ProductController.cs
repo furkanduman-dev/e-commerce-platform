@@ -272,4 +272,12 @@ public class ProductController : Controller
 
         return RedirectToAction("Index");
     }
+
+    public ActionResult Detail()
+    {
+
+
+        return View();
+    }
+
 }
