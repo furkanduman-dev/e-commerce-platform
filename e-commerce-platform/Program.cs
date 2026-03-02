@@ -1,5 +1,5 @@
 using e_commerce_platform.Models;
-using e_commerce_platform.Service;
+using e_commerce_platform.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

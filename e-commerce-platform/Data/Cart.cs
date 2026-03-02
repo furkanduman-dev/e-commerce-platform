@@ -12,7 +12,7 @@ public class Cart
 
     public void AddItem(Product product, int Miktar)
     {
-        var item = CartItems.Where(i => i.CartId == product.Id).FirstOrDefault();
+        var item = CartItems.Where(i => i.ProductId == product.Id).FirstOrDefault();
 
         if (item == null)
         {
@@ -28,21 +28,20 @@ public class Cart
         }
     }
 
-    public void DeleteItem(int productId, int Miktar)
+    public void DeleteItem(int productId, int miktar)
     {
-        var item = CartItems.Where(i => i.ProductId == productId).FirstOrDefault();
+        var item = CartItems.FirstOrDefault(i => i.ProductId == productId);
 
         if (item != null)
         {
-            item.Miktar -= item.Miktar;
+            item.Miktar -= miktar;
 
-            if (item.Miktar == 0)
+            if (item.Miktar <= 0)
             {
                 CartItems.Remove(item);
             }
         }
     }
-
     public double AraToplam()
     {
         return CartItems.Sum(i => i.Product.Price * i.Miktar);

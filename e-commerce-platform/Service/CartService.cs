@@ -1,7 +1,7 @@
 using e_commerce_platform.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace e_commerce_platform.Service;
+namespace e_commerce_platform.Services;
 
 
 public interface ICartService
@@ -43,12 +43,13 @@ public class CartService : ICartService
         }
     }
 
-    public async Task<Cart> GetCart(string CustomerId)
+    public async Task<Cart> GetCart(string custId)
     {
         var cart = await _context.Carts
         .Include(i => i.CartItems)
         .ThenInclude(i => i.Product)
-        .Where(i => i.CustomerId == CustomerId)
+        .ThenInclude(i => i.Images)
+        .Where(i => i.CustomerId == custId)
         .FirstOrDefaultAsync();
 
         if (cart == null)

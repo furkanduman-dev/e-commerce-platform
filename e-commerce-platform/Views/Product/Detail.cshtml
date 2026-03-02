@@ -14,7 +14,13 @@
             <div class="card border-0 shadow-sm rounded-4 p-3">
 
                 <!-- MAIN IMAGE -->
-                <img id="mainImage" src="~/img/@Model.Images" class="img-fluid rounded-4 mb-3"
+                @{
+                    var mainImage = Model.Images
+                    .Where(x => x.IsMain)
+                    .Select(x => x.ImageUrl)
+                    .FirstOrDefault() ?? "default.jpg"; // fallback
+                }
+                <img id="mainImage" src="~/img/@mainImage" class="img-fluid rounded-4 mb-3"
                     style="object-fit:cover; height:450px; width:100%;" />
 
                 <!-- THUMBNAILS -->
@@ -61,9 +67,14 @@
                 }
 
                 <div class="d-grid gap-2 col-8">
-                    <button class="btn btn-dark btn-lg rounded-pill">
-                        Sepete Ekle
-                    </button>
+
+                    <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="ProductId" value="@Model.Id">
+                        <button type="submit" class="btn btn-warning">
+                            <i class="fa fa-shopping-basket me-1"></i> Sepete Ekle
+                        </button>
+                    </form>
+
                 </div>
 
             </div>

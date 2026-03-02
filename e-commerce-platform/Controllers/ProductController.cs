@@ -273,11 +273,19 @@ public class ProductController : Controller
         return RedirectToAction("Index");
     }
 
-    public ActionResult Detail()
+    public ActionResult Detail(int id)
     {
+        var details = _contex.Products
+         .Include(p => p.Images)
+         .FirstOrDefault(p => p.Id == id);
+
+        if (details == null)
+        {
+            return RedirectToAction("List", "Product");
+        }
 
 
-        return View();
+        return View(details);
     }
 
 }
