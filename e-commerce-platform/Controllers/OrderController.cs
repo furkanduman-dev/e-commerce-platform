@@ -10,4 +10,9 @@ public class OrderController : Controller
     {
         return View();
     }
+
+    public ActionResult Details()
+    {
+        return View();
+    }
 }
