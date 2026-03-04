@@ -15,4 +15,9 @@ public class OrderController : Controller
     {
         return View();
     }
+
+    public ActionResult Checkout()
+    {
+        return View();
+    }
 }
