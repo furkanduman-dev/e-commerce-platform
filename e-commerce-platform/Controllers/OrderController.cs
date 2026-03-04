@@ -25,4 +25,9 @@ public class OrderController : Controller
     {
         return View();
     }
+
+    public ActionResult OrderList()
+    {
+        return View();
+    }
 }
