@@ -20,4 +20,9 @@ public class OrderController : Controller
     {
         return View();
     }
+
+    public ActionResult Complated()
+    {
+        return View();
+    }
 }
