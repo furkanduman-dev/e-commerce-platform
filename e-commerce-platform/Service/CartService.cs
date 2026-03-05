@@ -9,7 +9,7 @@ public interface ICartService
 
     string GetCustomerId();
 
-    Task<Cart> GetCart(string CustomerId);
+    Task<Cart> GetCart(string customerId);
 
     Task AddToCart(int productId, int Miktar = 1);
 
