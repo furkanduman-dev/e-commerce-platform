@@ -28,12 +28,16 @@ public class OrderController : Controller
 
     public ActionResult Index()
     {
-        return View();
+        return View(_context.Orders.ToList());
     }
 
-    public ActionResult Details()
+    public ActionResult Details(int id)
     {
-        return View();
+        var order = _context.Orders
+        .Include(i => i.OrderItems)
+        .ThenInclude(i => i.product)
+        .FirstOrDefaultAsync(i => i.Id == id);
+        return View(order);
     }
 
     public async Task<ActionResult> Checkout()
