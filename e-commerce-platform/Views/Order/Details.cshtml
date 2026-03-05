@@ -1,0 +1,136 @@
+@model Order
+<style>
+    .card {
+        border-radius: 14px;
+    }
+
+    .table td {
+        vertical-align: middle;
+    }
+
+    h5 {
+        font-weight: 600;
+    }
+</style>
+<section class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Sipariş Detayı</h2>
+        <a asp-action="Index" class="btn btn-outline-secondary">← Siparişlere Dön</a>
+    </div>
+
+    <div class="row">
+
+        <!-- Müşteri Bilgileri -->
+        <div class="col-md-5">
+
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body">
+
+                    <h5 class="mb-3">Müşteri Bilgileri</h5>
+
+                    <p><strong>Ad Soyad:</strong> @Model.Adsoyad</p>
+                    <p><strong>Kullanıcı:</strong> @Model.Username</p>
+                    <p><strong>Telefon:</strong> @Model.Telefon</p>
+                    <p><strong>Şehir:</strong> @Model.Sehir</p>
+                    <p><strong>Adres:</strong> @Model.AdresSatırı</p>
+                    <p><strong>Posta Kodu:</strong> @Model.PostaKodu</p>
+
+                    @if (!string.IsNullOrEmpty(Model.SiparisNotu))
+                    {
+                        <div class="alert alert-light mt-3">
+                            <strong>Sipariş Notu:</strong><br />
+                            @Model.SiparisNotu
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+
+                    <h5 class="mb-3">Sipariş Özeti</h5>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Ara Toplam</span>
+                        <span>₺@Model.AraToplam().ToString("0.00")</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>KDV (%20)</span>
+                        <span>₺@(Model.AraToplam() * 0.2)</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>Toplam</span>
+                        <span class="text-success">
+                            ₺@Model.Toplam().ToString("0.00")
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Sipariş Ürünleri -->
+        <div class="col-md-7">
+
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+
+                    <h5 class="mb-4">Sipariş Ürünleri</h5>
+
+                    <table class="table align-middle">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th>Ürün</th>
+                                <th>Fiyat</th>
+                                <th>Adet</th>
+                                <th>Toplam</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in Model.OrderItems)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <strong>@item.product.Name</strong>
+                                    </td>
+
+                                    <td>
+                                        ₺@item.Fiyat.ToString("0.00")
+                                    </td>
+
+                                    <td>
+                                        @item.Miktar
+                                    </td>
+
+                                    <td>
+                                        ₺@(item.Fiyat* item.Miktar)
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

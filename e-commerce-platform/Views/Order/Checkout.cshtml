@@ -1,4 +1,4 @@
-@model e_commerce_platform.Models.OrderCreateModel
+@model OrderCreateModel
 <style>
     .checkout-section {
         background: #f6f7fb;
@@ -33,6 +33,7 @@
         <h2 class="mb-4 fw-bold">Sipariş Tamamla</h2>
 
         <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="row">
 
                 <!-- ADRES BİLGİLERİ -->
@@ -80,36 +81,40 @@
                 <div class="col-lg-5">
 
                     <div class="checkout-card mb-4">
-                        <h5 class="mb-3">Ödeme Bilgileri</h5>
+                        <form action="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <h5 class="mb-3">Ödeme Bilgileri</h5>
 
-                        <div class="mb-3">
-                            <label asp-for="CartName" class="form-label">Kart Üzerindeki İsim</label>
-                            <input asp-for="CartName" class="form-control">
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="CartNumber" class="form-label">Kart Numarası</label>
-                            <input asp-for="CartNumber" class="form-control">
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-md-4 mb-3">
-                                <label asp-for="CartExpirationMonth" class="form-label">Ay</label>
-                                <input asp-for="CartExpirationMonth" class="form-control">
+                            <div class="mb-3">
+                                <label asp-for="CartName" class="form-label">Kart Üzerindeki İsim</label>
+                                <input asp-for="CartName" class="form-control">
                             </div>
 
-                            <div class="col-md-4 mb-3">
-                                <label asp-for="CartExpirationYear" class="form-label">Yıl</label>
-                                <input asp-for="CartExpirationYear" class="form-control">
+                            <div class="mb-3">
+                                <label asp-for="CartNumber" class="form-label">Kart Numarası</label>
+                                <input asp-for="CartNumber" class="form-control">
                             </div>
 
-                            <div class="col-md-4 mb-3">
-                                <label asp-for="CartCVV" class="form-label">CVV</label>
-                                <input asp-for="CartCVV" class="form-control">
+                            <div class="row">
+
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="CartExpirationMonth" class="form-label">Ay</label>
+                                    <input asp-for="CartExpirationMonth" class="form-control">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="CartExpirationYear" class="form-label">Yıl</label>
+                                    <input asp-for="CartExpirationYear" class="form-control">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="CartCVV" class="form-label">CVV</label>
+                                    <input asp-for="CartCVV" class="form-control">
+                                </div>
+
                             </div>
 
-                        </div>
+                        </form>
 
                     </div>
 
@@ -123,6 +128,41 @@
 
                     </div>
 
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="h6 mb-0">
+                            Sipariş Özeti
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            @foreach (var item in ViewBag.Cart.CartItems)
+                            {
+                                <div class="d-flex justify-content-between align-items-center list-group-item">
+                                    <p> @item.Coffee.Name - Adet:@item.Miktar </p>
+                                    <span>@(item.Coffee.Price* item.Miktar) TL</span>
+                                </div>
+                            }
+                            <div class="d-flex justify-content-between align-items-center list-group-item">
+                                <p class="mb-0"> Ara Toplam </p>
+                                <span>@ViewBag.Cart.AraToplam() TL</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center list-group-item text-danger">
+                                <p class="mb-0"> Toplam </p>
+                                <span class="fs-5">@ViewBag.Cart.Toplam() TL</span>
+                            </div>
+                        </div>
+                        <div class="d-grid mt-3">
+                            <button type="submit" asp-action="Checkout" asp-controller="Order"
+                                class="btn btn-primary btn-lg">
+                                Siprişi Tamamla
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
             </div>
