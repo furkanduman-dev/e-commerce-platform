@@ -239,11 +239,10 @@ public class AccountController : Controller
 
         var link = $"<a href='http://localhost:5041{url}'>Şifre Yenile</a>"; //link oluştur
 
-        var domain = "https://www.senin-domainin.com"; // yayına aldığın domain
-
         //GPT daha güvenli olarak sundu
+        // var domain = "https://www.senin-domainin.com"; // yayına aldığın domain
         // var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
-        // var url = Url.Action("ResetPassword", "Account", new { userId = user.Id, token = encodedToken }, protocol: "https");
+        // var url = Url.Action("ResetPassword", "Account", new { userId = user.Id, token = encodedToken }, protocol: "https");sss
         // var link = $"<a href='{domain}{url}'>Şifre Yenile</a>";
 
         await _emailservice.SendEmailAsync(user.Email!, "Parola Sıfırlama", link); //interface göre sırala ve üstte gelen linki sona ekle
