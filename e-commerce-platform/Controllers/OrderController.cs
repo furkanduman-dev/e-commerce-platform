@@ -35,7 +35,7 @@ public class OrderController : Controller
     {
         var order = _context.Orders
         .Include(i => i.OrderItems)
-        .ThenInclude(i => i.product)
+        .ThenInclude(i => i.Product)
         .FirstOrDefaultAsync(i => i.Id == id);
         return View(order);
     }
@@ -85,7 +85,7 @@ public class OrderController : Controller
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Complated", new { orderId = order.Id });
+                return RedirectToAction("Complete", new { orderId = order.Id });
             }
             else
             {
@@ -98,9 +98,9 @@ public class OrderController : Controller
         return View(createModel);
     }
 
-    public ActionResult Complated(string orderId)
+    public ActionResult Complete(string orderId)
     {
-        return View("Complated", orderId);
+        return View("Complete", orderId);
     }
 
     public async Task<ActionResult> OrderList()
@@ -108,7 +108,7 @@ public class OrderController : Controller
         var username = User.Identity?.Name;
         var orders = await _context.Orders
         .Include(i => i.OrderItems)
-        .ThenInclude(i => i.product)
+        .ThenInclude(i => i.Product)
         .Where(i => i.Username == username)
         .ToListAsync();
 

@@ -143,8 +143,8 @@
                             @foreach (var item in ViewBag.Cart.CartItems)
                             {
                                 <div class="d-flex justify-content-between align-items-center list-group-item">
-                                    <p> @item.Coffee.Name - Adet:@item.Miktar </p>
-                                    <span>@(item.Coffee.Price* item.Miktar) TL</span>
+                                    <p> @item.Product.Name - Adet:@item.Miktar </p>
+                                    <span>@(item.Product.Price* item.Miktar) TL</span>
                                 </div>
                             }
                             <div class="d-flex justify-content-between align-items-center list-group-item">
