@@ -1,0 +1,132 @@
+@model e_commerce_platform.Models.OrderCreateModel
+<style>
+    .checkout-section {
+        background: #f6f7fb;
+        min-height: 80vh;
+    }
+
+    .checkout-card {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .checkout-card h5 {
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .btn-dark {
+        border-radius: 10px;
+        font-size: 18px;
+    }
+</style>
+<section class="checkout-section py-5">
+    <div class="container">
+
+        <h2 class="mb-4 fw-bold">Sipariş Tamamla</h2>
+
+        <form method="post">
+            <div class="row">
+
+                <!-- ADRES BİLGİLERİ -->
+                <div class="col-lg-7">
+
+                    <div class="checkout-card mb-4">
+                        <h5 class="mb-3">Teslimat Bilgileri</h5>
+
+                        <div class="mb-3">
+                            <label asp-for="AdSoyad" class="form-label">Ad Soyad</label>
+                            <input asp-for="AdSoyad" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Telefon" class="form-label">Telefon</label>
+                            <input asp-for="Telefon" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Sehir" class="form-label">Şehir</label>
+                            <input asp-for="Sehir" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="AdresSatiri" class="form-label">Adres</label>
+                            <textarea asp-for="AdresSatiri" rows="3" class="form-control"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PostaKodu" class="form-label">Posta Kodu</label>
+                            <input asp-for="PostaKodu" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="SiparisNotu" class="form-label">Sipariş Notu</label>
+                            <textarea asp-for="SiparisNotu" rows="2" class="form-control"></textarea>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- KART BİLGİLERİ -->
+                <div class="col-lg-5">
+
+                    <div class="checkout-card mb-4">
+                        <h5 class="mb-3">Ödeme Bilgileri</h5>
+
+                        <div class="mb-3">
+                            <label asp-for="CartName" class="form-label">Kart Üzerindeki İsim</label>
+                            <input asp-for="CartName" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="CartNumber" class="form-label">Kart Numarası</label>
+                            <input asp-for="CartNumber" class="form-control">
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="CartExpirationMonth" class="form-label">Ay</label>
+                                <input asp-for="CartExpirationMonth" class="form-control">
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="CartExpirationYear" class="form-label">Yıl</label>
+                                <input asp-for="CartExpirationYear" class="form-control">
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="CartCVV" class="form-label">CVV</label>
+                                <input asp-for="CartCVV" class="form-control">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SİPARİŞ BUTONU -->
+                    <div class="checkout-card text-center">
+
+                        <button type="submit" class="btn btn-dark w-100 py-3 fw-bold">
+                            Siparişi Tamamla
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</section>

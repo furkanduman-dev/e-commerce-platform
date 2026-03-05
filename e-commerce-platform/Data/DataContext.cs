@@ -20,6 +20,8 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int>
 
     public DbSet<Cart> Carts { get; set; }
 
+    public DbSet<Order> Orders { get; set; }
+
 
 
 
