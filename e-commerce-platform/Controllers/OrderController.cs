@@ -36,7 +36,7 @@ public class OrderController : Controller
         var order = _context.Orders
         .Include(i => i.OrderItems)
         .ThenInclude(i => i.Product)
-        .FirstOrDefaultAsync(i => i.Id == id);
+        .FirstOrDefault(i => i.Id == id);
         return View(order);
     }
 

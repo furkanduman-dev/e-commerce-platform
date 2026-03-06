@@ -1,5 +1,8 @@
 @model IEnumerable<Order>
+@{
 
+    Layout = "_AdminLayout";
+}
 <style>
     table td {
         vertical-align: middle;
@@ -58,7 +61,7 @@
 
                             <td>
                                 <span class="badge bg-success fs-6">
-                                    @order.Toplam().ToString("₺0.00")
+                                    @order.ToplamFiyat TL
                                 </span>
                             </td>
 
