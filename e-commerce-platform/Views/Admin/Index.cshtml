@@ -1,7 +1,7 @@
-@model
 @{
     Layout = "_AdminLayout";
 }
+@model List<Order>
 <style>
     body {
         background-color: #f4f6f9;
@@ -68,7 +68,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <div class="card-title-small">Toplam Ürün</div>
-                        <div class="card-value">124</div>
+                        <div class="card-value">@ViewBag.ProductCount</div>
                     </div>
                     <div class="stat-icon text-primary">
                         <i class="bi bi-box"></i>
@@ -82,7 +82,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <div class="card-title-small">Toplam Sipariş</div>
-                        <div class="card-value">58</div>
+                        <div class="card-value">@ViewBag.TotalOrder</div>
                     </div>
                     <div class="stat-icon text-success">
                         <i class="bi bi-cart"></i>
@@ -95,7 +95,7 @@
             <div class="stat-card shadow-sm">
                 <div>
                     <div class="card-title-small">Kullanıcılar</div>
-                    <div class="card-value">340</div>
+                    <div class="card-value">@ViewBag.TotallUser</div>
                 </div>
                 <div class="stat-icon text-warning">
                     <i class="bi bi-people"></i>
@@ -107,7 +107,7 @@
             <div class="stat-card shadow-sm">
                 <div>
                     <div class="card-title-small">Toplam Ciro</div>
-                    <div class="card-value">₺ 42.500</div>
+                    <div class="card-value">₺ @ViewBag.TotalPrice.ToString("N3")</div>
                 </div>
                 <div class="stat-icon text-danger">
                     <i class="bi bi-currency-dollar"></i>
@@ -134,18 +134,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1024</td>
-                        <td>Ahmet Yılmaz</td>
-                        <td>₺ 850</td>
-                        <td><span class="badge-soft-success">Tamamlandı</span></td>
-                    </tr>
-                    <tr>
-                        <td>1025</td>
-                        <td>Mehmet Kaya</td>
-                        <td>₺ 1200</td>
-                        <td><span class="badge-soft-warning">Hazırlanıyor</span></td>
-                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Adsoyad</td>
+                            <td>₺ @item.ToplamFiyat.ToString("0.00")</td>
+                            <td><span class="badge-soft-success">Tamamlandı</span></td>
+                        </tr>
+                    }
+
+
                 </tbody>
             </table>
         </div>
