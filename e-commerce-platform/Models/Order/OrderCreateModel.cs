@@ -22,6 +22,8 @@ public class OrderCreateModel
 
     public string? SiparisNotu { get; set; }
 
+    public int ShippingStatusId { get; set; }
+
 
     //KART BİLGİLERİ
     public string CartName { get; set; } = null!;

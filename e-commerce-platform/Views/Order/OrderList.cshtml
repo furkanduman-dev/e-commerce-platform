@@ -32,6 +32,7 @@
                         <th>Şehir</th>
                         <th>Telefon</th>
                         <th>Tarih</th>
+                        <th>Kargo</th>
                         <th>Toplam</th>
                         <th width="120"></th>
                     </tr>
@@ -62,6 +63,11 @@
                             <td>
                                 @order.SiparisTarihi.ToString("dd MMM yyyy")
                             </td>
+
+                            <td>
+                                @order.ShippingStatus.Name
+                            </td>
+
 
                             <td class="fw-bold text-success">
                                 ₺@order.Toplam().ToString("0.00")

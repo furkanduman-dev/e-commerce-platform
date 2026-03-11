@@ -11,8 +11,8 @@ using e_commerce_platform.Models;
 namespace e_commerce_platform.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20260311171404_shippingModel")]
-    partial class shippingModel
+    [Migration("20260311201554_shippingModel1")]
+    partial class shippingModel1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -312,6 +312,9 @@ namespace e_commerce_platform.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ShippingStatusId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("SiparisNotu")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -331,6 +334,8 @@ namespace e_commerce_platform.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ShippingStatusId");
 
                     b.ToTable("Orders");
                 });
@@ -572,6 +577,17 @@ namespace e_commerce_platform.Migrations
                     b.Navigation("Cart");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("e_commerce_platform.Models.Order", b =>
+                {
+                    b.HasOne("e_commerce_platform.Models.ShippingStatus", "ShippingStatus")
+                        .WithMany()
+                        .HasForeignKey("ShippingStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ShippingStatus");
                 });
 
             modelBuilder.Entity("e_commerce_platform.Models.OrderItem", b =>

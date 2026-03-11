@@ -34,6 +34,7 @@ public class OrderController : Controller
     public ActionResult Details(int id)
     {
         var order = _context.Orders
+        .Include(i => i.ShippingStatus)
         .Include(i => i.OrderItems)
         .ThenInclude(i => i.Product)
         .FirstOrDefault(i => i.Id == id);
@@ -68,6 +69,7 @@ public class OrderController : Controller
                 SiparisTarihi = DateTime.Now,
                 ToplamFiyat = cart.Toplam(),
                 Username = userName,
+                ShippingStatusId = 1,
                 OrderItems = cart.CartItems.Select(ci => new Models.OrderItem
                 {
                     ProductId = ci.ProductId,
@@ -107,6 +109,7 @@ public class OrderController : Controller
     {
         var username = User.Identity?.Name;
         var orders = await _context.Orders
+        .Include(i => i.ShippingStatus)
         .Include(i => i.OrderItems)
         .ThenInclude(i => i.Product)
         .Where(i => i.Username == username)

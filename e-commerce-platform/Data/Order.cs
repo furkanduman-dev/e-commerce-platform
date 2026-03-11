@@ -26,7 +26,18 @@ public class Order
     public double ToplamFiyat { get; set; }
 
 
+
+
+    // Foreign Key
+    public int ShippingStatusId { get; set; }
+
+    // Navigation
+    public ShippingStatus ShippingStatus { get; set; }
+
     public List<OrderItem> OrderItems { get; set; } = new();
+
+
+
 
 
     public double AraToplam()

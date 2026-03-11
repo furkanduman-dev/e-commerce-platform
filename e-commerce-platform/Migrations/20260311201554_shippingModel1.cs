@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace e_commerce_platform.Migrations
 {
     /// <inheritdoc />
-    public partial class shippingModel : Migration
+    public partial class shippingModel1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -80,27 +80,6 @@ namespace e_commerce_platform.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    SiparisTarihi = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Adsoyad = table.Column<string>(type: "TEXT", nullable: false),
-                    Username = table.Column<string>(type: "TEXT", nullable: false),
-                    Sehir = table.Column<string>(type: "TEXT", nullable: false),
-                    AdresSatırı = table.Column<string>(type: "TEXT", nullable: false),
-                    PostaKodu = table.Column<string>(type: "TEXT", nullable: false),
-                    Telefon = table.Column<string>(type: "TEXT", nullable: false),
-                    SiparisNotu = table.Column<string>(type: "TEXT", nullable: false),
-                    ToplamFiyat = table.Column<double>(type: "REAL", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -266,6 +245,34 @@ namespace e_commerce_platform.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    SiparisTarihi = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Adsoyad = table.Column<string>(type: "TEXT", nullable: false),
+                    Username = table.Column<string>(type: "TEXT", nullable: false),
+                    Sehir = table.Column<string>(type: "TEXT", nullable: false),
+                    AdresSatırı = table.Column<string>(type: "TEXT", nullable: false),
+                    PostaKodu = table.Column<string>(type: "TEXT", nullable: false),
+                    Telefon = table.Column<string>(type: "TEXT", nullable: false),
+                    SiparisNotu = table.Column<string>(type: "TEXT", nullable: false),
+                    ToplamFiyat = table.Column<double>(type: "REAL", nullable: false),
+                    ShippingStatusId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_ShippingStatuses_ShippingStatusId",
+                        column: x => x.ShippingStatusId,
+                        principalTable: "ShippingStatuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CartItem",
                 columns: table => new
                 {
@@ -286,6 +293,28 @@ namespace e_commerce_platform.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CartItem_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductImages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    IsMain = table.Column<bool>(type: "INTEGER", nullable: false),
+                    DisplayOrder = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductImages_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -314,28 +343,6 @@ namespace e_commerce_platform.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderItem_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductImages",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false),
-                    IsMain = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DisplayOrder = table.Column<int>(type: "INTEGER", nullable: false),
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductImages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProductImages_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -420,6 +427,11 @@ namespace e_commerce_platform.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_ShippingStatusId",
+                table: "Orders",
+                column: "ShippingStatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductImages_ProductId",
                 table: "ProductImages",
                 column: "ProductId");
@@ -458,9 +470,6 @@ namespace e_commerce_platform.Migrations
                 name: "ProductImages");
 
             migrationBuilder.DropTable(
-                name: "ShippingStatuses");
-
-            migrationBuilder.DropTable(
                 name: "Sliders");
 
             migrationBuilder.DropTable(
@@ -477,6 +486,9 @@ namespace e_commerce_platform.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "ShippingStatuses");
 
             migrationBuilder.DropTable(
                 name: "Categories");

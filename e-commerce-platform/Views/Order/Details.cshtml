@@ -93,6 +93,7 @@
                                 <th>Ürün</th>
                                 <th>Fiyat</th>
                                 <th>Adet</th>
+                                <th>Kargo</th>
                                 <th>Toplam</th>
                             </tr>
                         </thead>
@@ -113,6 +114,10 @@
 
                                     <td>
                                         @item.Miktar
+                                    </td>
+
+                                    <td>
+                                        @item.Order.ShippingStatus.Name
                                     </td>
 
                                     <td>

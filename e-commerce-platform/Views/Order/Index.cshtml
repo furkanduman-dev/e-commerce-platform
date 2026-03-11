@@ -36,6 +36,7 @@
                         <th>Şehir</th>
                         <th>Telefon</th>
                         <th>Sipariş Tarihi</th>
+                        <th>Kargo</th>
                         <th>Toplam</th>
                         <th></th>
                     </tr>
@@ -58,6 +59,8 @@
                             <td>@order.Telefon</td>
 
                             <td>@order.SiparisTarihi.ToString("dd.MM.yyyy")</td>
+
+                            <td>@order.ShippingStatusId</td>
 
                             <td>
                                 <span class="badge bg-success fs-6">
