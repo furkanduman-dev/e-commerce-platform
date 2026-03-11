@@ -17,6 +17,7 @@ public class AdminController : Controller
     public ActionResult Index()
     {
         var orders = _context.Orders
+        .Include(i => i.ShippingStatus)
         .Include(o => o.OrderItems)
         .ThenInclude(oi => oi.Product)
         .ToList();

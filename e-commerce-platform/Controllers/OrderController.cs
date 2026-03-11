@@ -4,6 +4,7 @@ using e_commerce_platform.Services;
 using Iyzipay.Model;
 using Iyzipay.Request;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -31,14 +32,42 @@ public class OrderController : Controller
         return View(_context.Orders.ToList());
     }
 
-    public ActionResult Details(int id)
+    public async Task<IActionResult> Details(int id)
     {
-        var order = _context.Orders
-        .Include(i => i.ShippingStatus)
-        .Include(i => i.OrderItems)
-        .ThenInclude(i => i.Product)
-        .FirstOrDefault(i => i.Id == id);
+        var order = await _context.Orders
+            .Include(o => o.ShippingStatus)
+            .Include(o => o.OrderItems)
+            .ThenInclude(oi => oi.Product)
+            .FirstOrDefaultAsync(o => o.Id == id);
+
+        if (order == null)
+        {
+            return NotFound();
+        }
+
+        ViewBag.StatusList = new SelectList(
+            _context.ShippingStatuses,
+            "Id",
+            "Name",
+            order.ShippingStatusId
+        );
+
         return View(order);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateShippingStatus(int orderId, int statusId)
+    {
+        var order = await _context.Orders
+            .FirstOrDefaultAsync(i => i.Id == orderId);
+
+        if (order != null)
+        {
+            order.ShippingStatusId = statusId;
+            await _context.SaveChangesAsync();
+        }
+
+        return RedirectToAction("Details", new { id = orderId });
     }
 
     public async Task<ActionResult> Checkout()

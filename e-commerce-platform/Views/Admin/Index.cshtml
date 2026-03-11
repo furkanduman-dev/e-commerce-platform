@@ -140,7 +140,7 @@
                             <td>@item.Id</td>
                             <td>@item.Adsoyad</td>
                             <td>₺ @item.ToplamFiyat.ToString("0.00")</td>
-                            <td><span class="badge-soft-success">Tamamlandı</span></td>
+                            <td><span class="badge-soft-success">@item.ShippingStatus.Name</span></td>
                         </tr>
                     }
 
