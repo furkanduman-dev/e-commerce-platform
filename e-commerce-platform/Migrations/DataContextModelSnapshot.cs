@@ -445,6 +445,25 @@ namespace e_commerce_platform.Migrations
                         });
                 });
 
+            modelBuilder.Entity("e_commerce_platform.Models.ShippingStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShippingStatuses");
+                });
+
             modelBuilder.Entity("e_commerce_platform.Models.Slider", b =>
                 {
                     b.Property<int>("Id")
@@ -560,7 +579,7 @@ namespace e_commerce_platform.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("e_commerce_platform.Models.Product", "product")
+                    b.HasOne("e_commerce_platform.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -568,7 +587,7 @@ namespace e_commerce_platform.Migrations
 
                     b.Navigation("Order");
 
-                    b.Navigation("product");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("e_commerce_platform.Models.Product", b =>
