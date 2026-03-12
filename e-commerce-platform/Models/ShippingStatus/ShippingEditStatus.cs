@@ -8,4 +8,6 @@ public class ShippingEditStatus
     public string Name { get; set; }
 
     public string Status { get; set; }
+
+    public int Step { get; set; }
 }

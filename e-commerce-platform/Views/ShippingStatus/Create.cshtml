@@ -30,6 +30,13 @@
             </div>
 
 
+            <div class="mb-3">
+                <label asp-for="Step" class="form-label"></label>
+                <input asp-for="Step" class="form-control" placeholder="Step Adı " />
+                <span asp-validation-for="Step" class="text-danger"></span>
+            </div>
+
+
 
             <div class="d-flex justify-content-end">
                 <a asp-action="Index" class="btn btn-secondary me-2">

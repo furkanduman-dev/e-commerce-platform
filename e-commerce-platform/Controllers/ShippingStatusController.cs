@@ -36,7 +36,8 @@ public class ShippingStatusController : Controller
             var status = new ShippingStatus
             {
                 Name = createmodel.Name,
-                Status = createmodel.Status
+                Status = createmodel.Status,
+                Step = createmodel.Step
             };
 
             _context.ShippingStatuses.Add(status);
@@ -55,7 +56,8 @@ public class ShippingStatusController : Controller
         {
             Id = i.Id,
             Name = i.Name,
-            Status = i.Status
+            Status = i.Status,
+            Step = i.Step
         }).FirstOrDefault(i => i.Id == id);
 
         return View(edit);
@@ -77,6 +79,7 @@ public class ShippingStatusController : Controller
             editmodel.Id = shippingEdit.Id;
             editmodel.Name = shippingEdit.Name;
             editmodel.Status = shippingEdit.Status;
+            editmodel.Step = shippingEdit.Step;
 
             _context.SaveChanges();
 

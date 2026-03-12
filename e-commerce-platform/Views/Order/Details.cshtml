@@ -22,7 +22,7 @@
         <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#shippingModal">
             Kargo Durumu Değiştir
         </button>
-    </div>7
+    </div>
 
 
     <div class="row">
@@ -138,11 +138,45 @@
                     </table>
 
                 </div>
+
+
+            </div>
+
+            <div class="card shadow-sm border-0 rounded-4 mt-3">
+                <div class="card-body" id="status">
+
+                    <h5 class="mb-4">Kargo Durumu</h5>
+
+                    <div class="progress" style="height:25px;">
+                        <div class="progress-bar @GetProgressColor(Model.ShippingStatus.Step, ViewBag.TotalStatus)"
+                            role="progressbar"
+                            style="width:@GetProgress(Model.ShippingStatus.Step, ViewBag.TotalStatus)%">
+
+                            @Model.ShippingStatus.Name
+
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-2 small">
+                        @foreach (var status in ViewBag.StatusSteps)
+                        {
+                            <span class="@(status.Step <= Model.ShippingStatus.Step ? "fw-bold text-success" : "")">
+                                @status.Name
+                            </span>
+                        }
+                    </div>
+
+                </div>
             </div>
 
         </div>
 
+
+
+
+
     </div>
+
 
 
 
@@ -185,3 +219,33 @@
     </div>
 
 </section>
+
+@functions {
+
+    public int GetProgress(int step, int totalStep)
+    {
+        if (totalStep == 0) return 0;
+
+        return (step * 100) / totalStep;
+    }
+
+    public string GetProgressColor(int step, int totalStep)
+    {
+        int progress = GetProgress(step, totalStep);
+
+        if (progress <= 25)
+            return "bg-secondary";
+
+        if (progress <= 50)
+            return "bg-warning";
+
+        if (progress <= 75)
+            return "bg-primary";
+
+        if (progress < 100)
+            return "bg-info";
+
+        return "bg-success";
+    }
+
+}

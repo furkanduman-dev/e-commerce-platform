@@ -45,12 +45,21 @@ public class OrderController : Controller
             return NotFound();
         }
 
+        // Progress hesaplamak için toplam status sayısı
+        ViewBag.TotalStatus = await _context.ShippingStatuses.CountAsync();
+
+        // Modal dropdown için status listesi
         ViewBag.StatusList = new SelectList(
-            _context.ShippingStatuses,
+            await _context.ShippingStatuses.ToListAsync(),
             "Id",
             "Name",
             order.ShippingStatusId
         );
+
+        // Progress bar altındaki timeline için sıralı status listesi
+        ViewBag.StatusSteps = await _context.ShippingStatuses
+            .OrderBy(s => s.Step)
+            .ToListAsync();
 
         return View(order);
     }
