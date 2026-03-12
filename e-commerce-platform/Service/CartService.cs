@@ -92,8 +92,27 @@ public class CartService : ICartService
         }
     }
 
-    public async Task TransferCartToUser(string UserName)
+    public async Task TransferCartToUser(string UserName) //giriş yapmadan önce sepete kelnen ürünü giriş yaptıktan sonraki sepete ekler
     {
-        var userCart = await GetCart(UserName);
+        var userCart = await GetCart(UserName); //giriş yapmış kullanıcının sepeti
+
+
+        var cookieCart = await GetCart(_httpContextAccessor.HttpContext?.Request.Cookies["customerId"]!); //giriş yapmamış kullanıcın sepeti
+
+        foreach (var item in cookieCart?.CartItems!)
+        {
+            var cartItem = userCart?.CartItems.Where(i => i.ProductId == item.ProductId).FirstOrDefault(); //daha önce bu ürün zaten giriş yapan kullanıcının sepetinde var mı ?
+
+            if (cartItem != null) //varsa miktarı arttır
+            {
+                cartItem.Miktar += item.Miktar;
+            }
+            else //yoksa ekle
+            {
+                userCart?.CartItems.Add(new CartItem { ProductId = item.ProductId, Miktar = item.Miktar });
+            }
+        }
+        _context.Carts.Remove(cookieCart); // login kartına aktarıldıktan sonra cookie kartını sil
+        await _context.SaveChangesAsync();
     }
 }
